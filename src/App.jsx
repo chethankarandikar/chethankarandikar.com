@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { useState } from 'react'
 import styled from '@emotion/styled'
 import { motion } from 'framer-motion'
-import { FaSun, FaMoon, FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Photos from './components/Photos'
 import Quotes from './components/Quotes'
@@ -79,10 +79,12 @@ const ThemeToggle = styled.button`
   border: none;
   cursor: pointer;
   color: inherit;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
   
   &:hover {
     background-color: ${props => props.theme === 'dark' ? '#333' : '#f0f0f0'};
@@ -158,7 +160,7 @@ function App() {
             <NavLink to="/quotes">quotes</NavLink>
           </Nav>
           <ThemeToggle theme={theme} onClick={toggleTheme}>
-            {theme === 'light' ? <FaMoon /> : <FaSun />}
+            {theme === 'light' ? 'dark' : 'light'}
           </ThemeToggle>
         </Header>
         

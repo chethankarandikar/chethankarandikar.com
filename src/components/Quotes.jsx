@@ -38,7 +38,7 @@ const quotes = [
   },
   {
     text: "everything around you started as someone’s impossible idea",
-    author: "Unknown"
+    author: "unknown"
   },
   {
     text: "comparison is the thief of joy",

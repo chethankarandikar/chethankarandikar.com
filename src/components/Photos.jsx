@@ -97,19 +97,46 @@ const StatItem = styled.div`
 const photos = [
   {
     id: 1,
-    url: "https://via.placeholder.com/400",
+    url: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
     location: "Paris, France",
     coordinates: [48.8566, 2.3522],
     date: "2023"
   },
   {
     id: 2,
-    url: "https://via.placeholder.com/400",
+    url: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
     location: "Tokyo, Japan",
     coordinates: [35.6762, 139.6503],
     date: "2023"
   },
-  // Add more photos as needed
+  {
+    id: 3,
+    url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    location: "Venice, Italy",
+    coordinates: [45.4408, 12.3155],
+    date: "2022"
+  },
+  {
+    id: 4,
+    url: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    location: "Santorini, Greece",
+    coordinates: [36.3932, 25.4615],
+    date: "2022"
+  },
+  {
+    id: 5,
+    url: "https://images.unsplash.com/photo-1555899434-94d1368aa7af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    location: "New York, USA",
+    coordinates: [40.7128, -74.0060],
+    date: "2021"
+  },
+  {
+    id: 6,
+    url: "https://images.unsplash.com/photo-1562979314-bee7453e911c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    location: "Taj Mahal, India",
+    coordinates: [27.1751, 78.0421],
+    date: "2021"
+  }
 ]
 
 // Countries you've visited
