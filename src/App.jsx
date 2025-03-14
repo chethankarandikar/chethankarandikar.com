@@ -200,6 +200,7 @@ function App() {
             <Route path="/quotes" element={<Quotes theme={theme} />} />
           </Routes>
         </MainContent>
+        <Analytics />
       </AppContainer>
     </Router>
   )
