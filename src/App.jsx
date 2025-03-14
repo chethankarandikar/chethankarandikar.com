@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import Photos from './components/Photos'
+import Travels from './components/Travels'
 import Quotes from './components/Quotes'
 import './App.css'
 
@@ -156,7 +156,7 @@ function App() {
           </motion.div>
           <Nav>
             <NavLink to="/">home</NavLink>
-            <NavLink to="/photos">photos</NavLink>
+            <NavLink to="/photos">travels</NavLink>
             <NavLink to="/quotes">quotes</NavLink>
           </Nav>
           <ThemeToggle theme={theme} onClick={toggleTheme}>
@@ -198,7 +198,7 @@ function App() {
                 </HeroSection>
               </>
             } />
-            <Route path="/photos" element={<Photos theme={theme} />} />
+            <Route path="/photos" element={<Travels theme={theme} />} />
             <Route path="/quotes" element={<Quotes theme={theme} />} />
           </Routes>
         </MainContent>
