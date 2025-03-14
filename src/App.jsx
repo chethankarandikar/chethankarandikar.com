@@ -186,10 +186,10 @@ function App() {
                     and as an avionics hardware engineer with the <BioLink href="https://illinoisspacesociety.org" target="_blank" rel="noopener noreferrer" theme={theme}>illinois space society.</BioLink>
                   </BioText>
                   <SocialLinks>
-                    <SocialLink href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                    <SocialLink href="https://github.com/chethankarandikar" target="_blank" rel="noopener noreferrer">
                       <FaGithub />
                     </SocialLink>
-                    <SocialLink href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                    <SocialLink href="https://linkedin.com/in/chethankarandikar" target="_blank" rel="noopener noreferrer">
                       <FaLinkedin />
                     </SocialLink>
                   </SocialLinks>

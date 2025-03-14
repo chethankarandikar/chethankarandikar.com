@@ -17,16 +17,6 @@ const QuoteCard = styled(motion.div)`
   padding: 2rem;
   border-radius: 8px;
   position: relative;
-  
-  &:before {
-    content: '"';
-    font-size: 4rem;
-    position: absolute;
-    top: -0.5rem;
-    left: 0.5rem;
-    color: ${props => props.theme === 'dark' ? '#444' : '#ddd'};
-    font-family: Georgia, serif;
-  }
 `
 
 const QuoteText = styled.p`
@@ -43,19 +33,59 @@ const QuoteAuthor = styled.p`
 
 const quotes = [
   {
-    text: "The only way to do great work is to love what you do.",
-    author: "Steve Jobs"
+    text: "don’t let the pursuit of success rob you of joy and playfulness",
+    author: "unknown"
   },
   {
-    text: "Life is what happens while you're busy making other plans.",
-    author: "John Lennon"
+    text: "everything around you started as someone’s impossible idea",
+    author: "Unknown"
   },
   {
-    text: "The journey of a thousand miles begins with one step.",
-    author: "Lao Tzu"
+    text: "comparison is the thief of joy",
+    author: "theodore roosevelt"
   },
-  // Add more quotes as needed
-]
+  {
+    text: "keep your eyes on the stars and your feet on the ground",
+    author: "theodore roosevelt"
+  },
+  {
+    text: "a society grows great when old men plant trees in whose shade they shall never sit",
+    author: "greek proverb"
+  },
+  {
+    text: "don’t follow your passion, follow your talent",
+    author: "scott galloway"
+  },
+  {
+    text: "heaven is on earth",
+    author: "unknown"
+  },
+  {
+    text: "hakuna matata, there are no troubles",
+    author: "the lion king"
+  },
+  {
+    text: "i'm not afraid of dying, i'm afraid I haven't been alive enough",
+    author: "jaco van dormael"
+  },
+  {
+    text: "don’t take life too seriously, it’s not like we are going to make it out alive",
+    author: "elbert hubbard"
+  },
+  {
+    text: "life is like chess\nwe can’t undo a move, but we can make the next one better",
+    author: "unknown"
+  },
+  {
+    text: "to get to die means you get to live",
+    author: "neil degrasse tyson"
+  },
+  {
+    text: "life happens wherever you are, whether you make it or not",
+    author: "uncle iroh"
+  }
+];
+
 
 function Quotes({ theme }) {
   return (
@@ -65,7 +95,7 @@ function Quotes({ theme }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Favorite Quotes
+        favorite quotes
       </motion.h2>
       
       <QuotesGrid>
