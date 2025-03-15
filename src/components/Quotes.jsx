@@ -25,14 +25,21 @@ const QuoteContainer = styled.div`
 const QuoteCard = styled(motion.div)`
   background: ${props => props.theme === 'dark' ? '#2a2a2a' : '#f5f5f5'};
   padding: 3rem;
-  border-radius: 12px;
+  border-radius: 8px;
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+`
+
+const QuoteContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 const QuoteText = styled.p`
@@ -47,16 +54,17 @@ const QuoteAuthor = styled.p`
   color: ${props => props.theme === 'dark' ? '#888' : '#666'};
   font-size: 1.2rem;
   text-align: center;
+  margin-bottom: 2rem;
 `
 
 const NavButton = styled.button`
   background: none;
   border: none;
   color: ${props => props.theme === 'dark' ? '#888' : '#666'};
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   position: absolute;
-  z-index: 10;
+  bottom: 1.5rem;
   opacity: 0.6;
   transition: opacity 0.3s ease;
   padding: 0.5rem;
@@ -70,13 +78,11 @@ const NavButton = styled.button`
   }
   
   &.left {
-    top: 15px;
-    left: 15px;
+    left: 1.5rem;
   }
   
   &.right {
-    top: 15px;
-    right: 15px;
+    right: 1.5rem;
   }
 `
 
@@ -182,6 +188,11 @@ function Quotes({ theme }) {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
           >
+            <QuoteContent>
+              <QuoteText>{quotes[currentIndex].text}</QuoteText>
+              <QuoteAuthor theme={theme}>— {quotes[currentIndex].author}</QuoteAuthor>
+            </QuoteContent>
+            
             <NavButton 
               className="left" 
               onClick={prevQuote}
@@ -197,9 +208,6 @@ function Quotes({ theme }) {
             >
               <FaArrowRight />
             </NavButton>
-            
-            <QuoteText>{quotes[currentIndex].text}</QuoteText>
-            <QuoteAuthor theme={theme}>— {quotes[currentIndex].author}</QuoteAuthor>
           </QuoteCard>
         </AnimatePresence>
       </QuoteContainer>
