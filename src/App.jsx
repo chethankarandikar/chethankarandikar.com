@@ -7,6 +7,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Travels from './components/Travels'
 import Quotes from './components/Quotes'
+import Photos from './components/Photos'
 import './App.css'
 
 const AppContainer = styled.div`
@@ -157,6 +158,7 @@ function App() {
           <Nav>
             <NavLink to="/">home</NavLink>
             <NavLink to="/photos">travels</NavLink>
+            <NavLink to="/gallery">photos</NavLink>
             <NavLink to="/quotes">quotes</NavLink>
           </Nav>
           <ThemeToggle theme={theme} onClick={toggleTheme}>
@@ -199,6 +201,7 @@ function App() {
               </>
             } />
             <Route path="/photos" element={<Travels theme={theme} />} />
+            <Route path="/gallery" element={<Photos theme={theme} />} />
             <Route path="/quotes" element={<Quotes theme={theme} />} />
           </Routes>
         </MainContent>

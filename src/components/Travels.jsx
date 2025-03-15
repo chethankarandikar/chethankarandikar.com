@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 // Import marker icons
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
@@ -20,31 +21,6 @@ L.Icon.Default.mergeOptions({
 
 const TravelsSection = styled.section`
   padding: 4rem 0;
-`
-
-const PhotoGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-`
-
-const PhotoCard = styled(motion.div)`
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  aspect-ratio: 1;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  &:hover img {
-    transform: scale(1.05);
-  }
 `
 
 const MapWrapper = styled.div`
@@ -94,55 +70,24 @@ const StatItem = styled.div`
   }
 `
 
-const SectionTitle = styled(motion.h3)`
-  margin-top: 4rem;
-  margin-bottom: 1rem;
+const PhotosButton = styled(Link)`
+  display: inline-block;
+  margin-top: 3rem;
+  padding: 0.8rem 1.5rem;
+  background: ${props => props.theme === 'dark' ? '#333' : '#f0f0f0'};
+  color: ${props => props.theme === 'dark' ? '#fff' : '#333'};
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: ${props => props.theme === 'dark' ? '#444' : '#e0e0e0'};
+    transform: translateY(-2px);
+  }
 `
 
-const photos = [
-  {
-    id: 1,
-    url: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Paris, France",
-    coordinates: [48.8566, 2.3522],
-    date: "2023"
-  },
-  {
-    id: 2,
-    url: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Tokyo, Japan",
-    coordinates: [35.6762, 139.6503],
-    date: "2023"
-  },
-  {
-    id: 3,
-    url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Venice, Italy",
-    coordinates: [45.4408, 12.3155],
-    date: "2022"
-  },
-  {
-    id: 4,
-    url: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Santorini, Greece",
-    coordinates: [36.3932, 25.4615],
-    date: "2022"
-  },
-  {
-    id: 5,
-    url: "https://images.unsplash.com/photo-1555899434-94d1368aa7af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "New York, USA",
-    coordinates: [40.7128, -74.0060],
-    date: "2021"
-  },
-  {
-    id: 6,
-    url: "https://images.unsplash.com/photo-1562979314-bee7453e911c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Taj Mahal, India",
-    coordinates: [27.1751, 78.0421],
-    date: "2021"
-  }
-]
+// Keep the photos array for reference but we won't display it
 
 // Countries you've visited
 const visitedCountries = [
@@ -262,26 +207,16 @@ function Travels({ theme }) {
         </MapStats>
       </motion.div>
 
-      <SectionTitle
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
+        style={{ textAlign: 'center', width: '100%' }}
       >
-        photos
-      </SectionTitle>
-      
-      <PhotoGrid>
-        {photos.map((photo, index) => (
-          <PhotoCard
-            key={photo.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-          >
-            <img src={photo.url} alt={photo.location} />
-          </PhotoCard>
-        ))}
-      </PhotoGrid>
+        <PhotosButton to="/gallery" theme={theme}>
+          See Travel Photos
+        </PhotosButton>
+      </motion.div>
     </TravelsSection>
   )
 }
