@@ -7,7 +7,8 @@ const PhotosSection = styled.section`
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   height: calc(100vh - 80px); /* Account for header */
   box-sizing: border-box;
 `
@@ -16,8 +17,7 @@ const PhotoContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 900px;
-  margin: 1.5rem auto 0;
-  height: calc(100% - 60px); /* Account for title */
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,49 +97,87 @@ const NavButton = styled.button`
 
 // Photo data from Travels component
 const photos = [
+  // 2025
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Paris, France",
-    coordinates: [48.8566, 2.3522],
-    date: "2023"
+    url: "/website-photos/mojave.jpg",
+    location: "mojave dessert, california",
+    coordinates: [],
+    date: "2025"
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Tokyo, Japan",
-    coordinates: [35.6762, 139.6503],
-    date: "2023"
+    url: "/website-photos/uiuc.jpg",
+    location: "urbana, illinois",
+    coordinates: [],
+    date: "2025"
   },
+  // 2024
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Venice, Italy",
-    coordinates: [45.4408, 12.3155],
-    date: "2022"
+    url: "/website-photos/maya-beach.jpg",
+    location: "maya beach, thailand",
+    coordinates: [],
+    date: "2024"
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Santorini, Greece",
-    coordinates: [36.3932, 25.4615],
-    date: "2022"
+    url: "/website-photos/chiang-mai.jpg",
+    location: "chiang mai, thailand",
+    coordinates: [],
+    date: "2024"
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1555899434-94d1368aa7af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "New York, USA",
-    coordinates: [40.7128, -74.0060],
-    date: "2021"
+    url: "/website-photos/antelope-canyon.jpg",
+    location: "antelope canyon, arizona",
+    coordinates: [],
+    date: "2024"
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1562979314-bee7453e911c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-    location: "Taj Mahal, India",
-    coordinates: [27.1751, 78.0421],
-    date: "2021"
+    url: "/website-photos/legacy-west.jpg",
+    location: "plano, texas",
+    coordinates: [],
+    date: "2024"
+  },
+  {
+    id: 7,
+    url: "/website-photos/lanikai-beach.JPG",
+    location: "lanikai beach, hawaii",
+    coordinates: [],
+    date: "2024"
+  },
+  // 2023
+  {
+    id: 8,
+    url: "/website-photos/hiroshima.jpg",
+    location: "itsukushima, japan",
+    coordinates: [],
+    date: "2023"
+  },
+  {
+    id: 9,
+    url: "/website-photos/kyoto.jpg",
+    location: "kyoto, japan",
+    coordinates: [],
+    date: "2023"
+  },
+  {
+    id: 10,
+    url: "/website-photos/lajolla.jpg",
+    location: "la jolla, california",
+    coordinates: [],
+    date: "2023"
+  },
+  {
+    id: 11,
+    url: "/website-photos/london.jpg",
+    location: "london, england",
+    coordinates: []
   }
 ];
+
 
 function Photos({ theme }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -167,14 +205,6 @@ function Photos({ theme }) {
   
   return (
     <PhotosSection>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        travel photos
-      </motion.h2>
-      
       <PhotoContainer 
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}

@@ -157,9 +157,9 @@ function App() {
           </motion.div>
           <Nav>
             <NavLink to="/">home</NavLink>
-            <NavLink to="/photos">travels</NavLink>
-            <NavLink to="/gallery">photos</NavLink>
-            <NavLink to="/quotes">quotes</NavLink>
+            <NavLink to="/travels">travels</NavLink>
+            <NavLink to="/photos">photos</NavLink>
+            {/* <NavLink to="/quotes">quotes</NavLink> */}
           </Nav>
           <ThemeToggle theme={theme} onClick={toggleTheme}>
             {theme === 'light' ? 'dark' : 'light'}
@@ -200,9 +200,9 @@ function App() {
                 </HeroSection>
               </>
             } />
-            <Route path="/photos" element={<Travels theme={theme} />} />
-            <Route path="/gallery" element={<Photos theme={theme} />} />
-            <Route path="/quotes" element={<Quotes theme={theme} />} />
+            <Route path="/travels" element={<Travels theme={theme} />} />
+            <Route path="/photos" element={<Photos theme={theme} />} />
+            {/* <Route path="/quotes" element={<Quotes theme={theme} />} /> */}
           </Routes>
         </MainContent>
         <Analytics />

@@ -7,7 +7,8 @@ const QuotesSection = styled.section`
   padding: 4rem 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   min-height: 70vh;
 `
 
@@ -15,7 +16,6 @@ const QuoteContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 800px;
-  margin: 3rem auto;
   height: 300px;
   display: flex;
   align-items: center;
@@ -32,7 +32,7 @@ const QuoteCard = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
 `
 
 const QuoteContent = styled.div`
@@ -167,14 +167,6 @@ function Quotes({ theme }) {
   
   return (
     <QuotesSection>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        favorite quotes
-      </motion.h2>
-      
       <QuoteContainer 
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}

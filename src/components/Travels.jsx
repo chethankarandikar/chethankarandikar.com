@@ -20,15 +20,15 @@ L.Icon.Default.mergeOptions({
 })
 
 const TravelsSection = styled.section`
-  padding: 4rem 0;
+  padding: 4rem 1;
 `
 
 const MapWrapper = styled.div`
-  height: 700px;
+  height: 600px;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  margin-top: 2rem;
+  margin-top: 0rem;
   
   .leaflet-container {
     background-color: #f8f8f8;
@@ -70,24 +70,28 @@ const StatItem = styled.div`
   }
 `
 
-const PhotosButton = styled(Link)`
-  display: inline-block;
-  margin-top: 3rem;
-  padding: 0.8rem 1.5rem;
-  background: ${props => props.theme === 'dark' ? '#333' : '#f0f0f0'};
-  color: ${props => props.theme === 'dark' ? '#fff' : '#333'};
-  border-radius: 4px;
+const PhotosLink = styled(Link)`
+  color: ${props => props.theme === 'dark' ? '#888' : '#666'};
   text-decoration: none;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  
+  .label {
+    margin-bottom: 0.25rem;
+    color: ${props => props.theme === 'dark' ? '#888' : '#666'};
+  }
+  
+  .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+  }
   
   &:hover {
-    background: ${props => props.theme === 'dark' ? '#444' : '#e0e0e0'};
-    transform: translateY(-2px);
+    opacity: 0.8;
   }
 `
-
-// Keep the photos array for reference but we won't display it
 
 // Countries you've visited
 const visitedCountries = [
@@ -154,14 +158,6 @@ function Travels({ theme }) {
 
   return (
     <TravelsSection>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        my travels
-      </motion.h2>
-      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -204,18 +200,11 @@ function Travels({ theme }) {
             <div className="value">{percentVisited}%</div>
             <div className="label">of world explored</div>
           </StatItem>
+          <PhotosLink to="/gallery" theme={theme}>
+            <div className="value">→</div>
+            <div className="label">photos</div>
+          </PhotosLink>
         </MapStats>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        style={{ textAlign: 'center', width: '100%' }}
-      >
-        <PhotosButton to="/gallery" theme={theme}>
-          See Travel Photos
-        </PhotosButton>
       </motion.div>
     </TravelsSection>
   )
