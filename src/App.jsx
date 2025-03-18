@@ -31,9 +31,8 @@ const Header = styled.header`
   
   @media (max-width: 768px) {
     padding: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 `
 
@@ -43,7 +42,10 @@ const Nav = styled.nav`
   
   @media (max-width: 768px) {
     gap: 1rem;
+    order: 3;
+    width: 100%;
     margin-top: 0.5rem;
+    justify-content: center;
   }
 `
 
@@ -101,6 +103,10 @@ const ThemeToggle = styled.button`
   
   &:hover {
     background-color: ${props => props.theme === 'dark' ? '#333' : '#f0f0f0'};
+  }
+  
+  @media (max-width: 768px) {
+    order: 2;
   }
 `
 
