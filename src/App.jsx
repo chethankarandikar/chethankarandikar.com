@@ -28,11 +28,23 @@ const Header = styled.header`
   right: 0;
   background-color: ${props => props.theme === 'dark' ? '#1a1a1a' : '#ffffff'};
   z-index: 1000;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 `
 
 const Nav = styled.nav`
   display: flex;
   gap: 2rem;
+  
+  @media (max-width: 768px) {
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
 `
 
 const NavLink = styled(Link)`
@@ -97,6 +109,11 @@ const MainContent = styled.main`
   margin: 0 auto;
   padding: 2rem;
   padding-top: 6rem;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+    padding-top: 7rem;
+  }
 `
 
 const HeroSection = styled.section`
@@ -105,17 +122,29 @@ const HeroSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  
+  @media (max-width: 768px) {
+    min-height: 70vh;
+  }
 `
 
 const Title = styled(motion.h1)`
   font-size: 4rem;
   margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `
 
 const Subtitle = styled(motion.p)`
   font-size: 1.5rem;
   color: ${props => props.theme === 'dark' ? '#888' : '#666'};
   margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `
 
 const BioText = styled(motion.p)`
@@ -123,6 +152,11 @@ const BioText = styled(motion.p)`
   line-height: 1.8;
   max-width: 600px;
   margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 `
 
 const BioLink = styled.a`

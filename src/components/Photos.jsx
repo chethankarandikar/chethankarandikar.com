@@ -11,6 +11,11 @@ const PhotosSection = styled.section`
   justify-content: center;
   height: calc(100vh - 80px); /* Account for header */
   box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+    height: calc(100vh - 120px); /* Adjusted for mobile header */
+  }
 `
 
 const PhotoContainer = styled.div`
@@ -21,6 +26,10 @@ const PhotoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `
 
 const PhotoWrapper = styled(motion.div)`
@@ -52,6 +61,12 @@ const PhotoInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 0.5rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
 `
 
 const PhotoDetails = styled.div`
@@ -63,17 +78,31 @@ const PhotoLocation = styled.p`
   font-size: 1.2rem;
   font-weight: 500;
   margin: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `
 
 const PhotoDate = styled.p`
   color: ${props => props.theme === 'dark' ? '#888' : '#666'};
   font-size: 1rem;
   margin: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `
 
 const NavControls = styled.div`
   display: flex;
   gap: 1rem;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
 `
 
 const NavButton = styled.button`

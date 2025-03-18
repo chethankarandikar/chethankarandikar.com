@@ -21,6 +21,10 @@ L.Icon.Default.mergeOptions({
 
 const TravelsSection = styled.section`
   padding: 4rem 1;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
 `
 
 const MapWrapper = styled.div`
@@ -29,6 +33,10 @@ const MapWrapper = styled.div`
   border-radius: 8px;
   overflow: hidden;
   margin-top: 0rem;
+  
+  @media (max-width: 768px) {
+    height: 400px;
+  }
   
   .leaflet-container {
     background-color: #f8f8f8;
@@ -54,19 +62,37 @@ const MapStats = styled.div`
   justify-content: space-between;
   margin-top: 1rem;
   font-size: 0.9rem;
+  
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
 `
 
 const StatItem = styled.div`
   text-align: center;
   
+  @media (max-width: 768px) {
+    flex: 1 0 40%;
+  }
+  
   .value {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 0.25rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
   
   .label {
     color: ${props => props.theme === 'dark' ? '#888' : '#666'};
+    
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
   }
 `
 
