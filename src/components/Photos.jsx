@@ -129,20 +129,27 @@ const photos = [
   },
   {
     id: 5,
+    url: "/website-photos/bangkok.jpg",
+    location: "bangkok, thailand",
+    coordinates: [],
+    date: "2024"
+  },
+  {
+    id: 6,
     url: "/website-photos/antelope-canyon.jpg",
     location: "antelope canyon, arizona",
     coordinates: [],
     date: "2024"
   },
   {
-    id: 6,
+    id: 7,
     url: "/website-photos/legacy-west.jpg",
     location: "plano, texas",
     coordinates: [],
     date: "2024"
   },
   {
-    id: 7,
+    id: 8,
     url: "/website-photos/lanikai-beach.JPG",
     location: "lanikai beach, hawaii",
     coordinates: [],
@@ -150,28 +157,28 @@ const photos = [
   },
   // 2023
   {
-    id: 8,
+    id: 9,
     url: "/website-photos/hiroshima.jpg",
     location: "itsukushima, japan",
     coordinates: [],
     date: "2023"
   },
   {
-    id: 9,
+    id: 10,
     url: "/website-photos/kyoto.jpg",
     location: "kyoto, japan",
     coordinates: [],
     date: "2023"
   },
   {
-    id: 10,
+    id: 11,
     url: "/website-photos/lajolla.jpg",
     location: "la jolla, california",
     coordinates: [],
     date: "2023"
   },
   {
-    id: 11,
+    id: 12,
     url: "/website-photos/london.jpg",
     location: "london, england",
     coordinates: []
