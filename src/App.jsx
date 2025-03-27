@@ -225,7 +225,7 @@ function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.6 }}
                   >
-                    i'm a 18 y/o computer engineering student at uiuc with a love for hardware and software development. 
+                    i'm an 18 year old computer engineering student at uiuc with a love for hardware and software development. 
                     i'm currently working as an undergraduate research assistant at <BioLink href="https://lassiaero.web.illinois.edu/about-lassi/" target="_blank" rel="noopener noreferrer" theme={theme}>lassi </BioLink> 
                     and as an avionics hardware engineer with the <BioLink href="https://illinoisspacesociety.org" target="_blank" rel="noopener noreferrer" theme={theme}>illinois space society.</BioLink>
                   </BioText>
