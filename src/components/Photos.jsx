@@ -130,7 +130,7 @@ const photos = [
   {
     id: 1,
     url: "/website-photos/mojave.jpg",
-    location: "mojave dessert, california",
+    location: "mojave desert, california",
     coordinates: [],
     date: "2025"
   },
