@@ -170,7 +170,7 @@ function Travels({ theme }) {
       .then(response => response.json())
       .then(data => {
         setGeoData(data);
-        setTotalCountries(data.features.length);
+        setTotalCountries(195);
       })
       .catch(error => console.error('Error loading GeoJSON data:', error));
   }, []);
