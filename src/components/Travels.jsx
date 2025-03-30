@@ -137,7 +137,6 @@ const visitedCountries = [
   "United Kingdom",
   "England",
   "Canada",
-  "Dominican Republic",
   "Haiti",
   "Honduras",
   "Jamaica",
