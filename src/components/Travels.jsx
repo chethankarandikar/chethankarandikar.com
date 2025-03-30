@@ -226,7 +226,7 @@ function Travels({ theme }) {
             <div className="value">{percentVisited}%</div>
             <div className="label">of world explored</div>
           </StatItem>
-          <PhotosLink to="/gallery" theme={theme}>
+          <PhotosLink to="/photos" theme={theme}>
             <div className="value">→</div>
             <div className="label">photos</div>
           </PhotosLink>
