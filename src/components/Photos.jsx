@@ -4,49 +4,26 @@ import { useState, useEffect, useCallback } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const PhotosSection = styled.section`
-  padding: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 80px); /* Account for header */
-  box-sizing: border-box;
-  
-  @media (max-width: 768px) {
-    padding: 1rem 0;
-    height: calc(100vh - 120px); /* Adjusted for mobile header */
-  }
+  padding: 2rem;
+  min-height: 100vh;
+  background: ${props => props.theme === 'dark' ? '#1a1a1a' : '#ffffff'};
 `
 
-const PhotoContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
+const PhotosGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 `
 
-const PhotoWrapper = styled(motion.div)`
+const PhotoCard = styled(motion.div)`
   position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`
-
-const PhotoFrame = styled.div`
-  position: relative;
-  flex: 1;
+  aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   background: ${props => props.theme === 'dark' ? '#2a2a2a' : '#f5f5f5'};
+  cursor: pointer;
 `
 
 const PhotoImage = styled.img`
@@ -56,72 +33,45 @@ const PhotoImage = styled.img`
 `
 
 const PhotoInfo = styled.div`
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.5rem;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-`
-
-const PhotoDetails = styled.div`
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
 `
 
 const PhotoLocation = styled.p`
-  font-size: 1.2rem;
-  font-weight: 500;
   margin: 0;
-  
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
+  font-size: 1rem;
+  font-weight: 500;
 `
 
 const PhotoDate = styled.p`
-  color: ${props => props.theme === 'dark' ? '#888' : '#666'};
-  font-size: 1rem;
-  margin: 0;
-  
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
 `
 
-const NavControls = styled.div`
+const ExpandedOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
-  gap: 1rem;
-  
-  @media (max-width: 768px) {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.5rem;
-  }
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
 `
 
-const NavButton = styled.button`
-  background: none;
-  border: none;
-  color: ${props => props.theme === 'dark' ? '#888' : '#666'};
-  font-size: 1.2rem;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-  padding: 0.5rem;
-  
-  &:hover {
-    opacity: 1;
-  }
-  
-  &:focus {
-    outline: none;
-  }
+const ExpandedImage = styled(motion.img)`
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
 `
 
 // Photo data from Travels component
@@ -158,27 +108,34 @@ const photos = [
   },
   {
     id: 5,
+    url: "/website-photos/chiang-mai.jpeg",
+    location: "chiang mai, thailand",
+    coordinates: [],
+    date: "2024"
+  },
+  {
+    id: 6,
     url: "/website-photos/bangkok.jpg",
     location: "bangkok, thailand",
     coordinates: [],
     date: "2024"
   },
   {
-    id: 6,
+    id: 7,
     url: "/website-photos/antelope-canyon.jpg",
     location: "antelope canyon, arizona",
     coordinates: [],
     date: "2024"
   },
   {
-    id: 7,
+    id: 8,
     url: "/website-photos/legacy-west.jpg",
     location: "plano, texas",
     coordinates: [],
     date: "2024"
   },
   {
-    id: 8,
+    id: 9,
     url: "/website-photos/lanikai-beach.JPG",
     location: "lanikai beach, hawaii",
     coordinates: [],
@@ -186,105 +143,89 @@ const photos = [
   },
   // 2023
   {
-    id: 9,
+    id: 10,
     url: "/website-photos/hiroshima.jpg",
     location: "itsukushima, japan",
     coordinates: [],
     date: "2023"
   },
   {
-    id: 10,
+    id: 11,
     url: "/website-photos/kyoto.jpg",
     location: "kyoto, japan",
     coordinates: [],
     date: "2023"
   },
   {
-    id: 11,
+    id: 12,
     url: "/website-photos/lajolla.jpg",
     location: "la jolla, california",
     coordinates: [],
     date: "2023"
   },
   {
-    id: 12,
+    id: 13,
     url: "/website-photos/london.jpg",
     location: "london, england",
     coordinates: []
   }
 ];
 
-
 function Photos({ theme }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  
-  const INTERVAL_DURATION = 5000; // 5 seconds per photo
-  
-  const nextPhoto = useCallback(() => {
-    setCurrentIndex(prevIndex => (prevIndex + 1) % photos.length);
-  }, []);
-  
-  const prevPhoto = useCallback(() => {
-    setCurrentIndex(prevIndex => (prevIndex - 1 + photos.length) % photos.length);
-  }, []);
-  
-  useEffect(() => {
-    if (isPaused) return;
-    
-    const autoChangeInterval = setInterval(() => {
-      nextPhoto();
-    }, INTERVAL_DURATION);
-    
-    return () => clearInterval(autoChangeInterval);
-  }, [isPaused, nextPhoto]);
-  
+  const [expandedPhoto, setExpandedPhoto] = useState(null);
+
+  const handlePhotoClick = (photo) => {
+    setExpandedPhoto(photo);
+  };
+
+  const handleCloseExpanded = () => {
+    setExpandedPhoto(null);
+  };
+
   return (
-    <PhotosSection>
-      <PhotoContainer 
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <AnimatePresence mode="wait">
-          <PhotoWrapper
-            key={currentIndex}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
+    <PhotosSection theme={theme}>
+      <PhotosGrid>
+        {photos.map((photo) => (
+          <PhotoCard
+            key={photo.id}
+            theme={theme}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            onClick={() => handlePhotoClick(photo)}
           >
-            <PhotoFrame theme={theme}>
-              <PhotoImage 
-                src={photos[currentIndex].url} 
-                alt={photos[currentIndex].location} 
-              />
-            </PhotoFrame>
-            
+            <PhotoImage 
+              src={photo.url} 
+              alt={photo.location} 
+            />
             <PhotoInfo>
-              <PhotoDetails>
-                <PhotoLocation>{photos[currentIndex].location}</PhotoLocation>
-                <PhotoDate theme={theme}>{photos[currentIndex].date}</PhotoDate>
-              </PhotoDetails>
-              
-              <NavControls>
-                <NavButton 
-                  onClick={prevPhoto}
-                  theme={theme}
-                >
-                  <FaArrowLeft />
-                </NavButton>
-                
-                <NavButton 
-                  onClick={nextPhoto}
-                  theme={theme}
-                >
-                  <FaArrowRight />
-                </NavButton>
-              </NavControls>
+              <PhotoLocation>{photo.location}</PhotoLocation>
+              {photo.date && <PhotoDate>{photo.date}</PhotoDate>}
             </PhotoInfo>
-          </PhotoWrapper>
-        </AnimatePresence>
-      </PhotoContainer>
+          </PhotoCard>
+        ))}
+      </PhotosGrid>
+
+      <AnimatePresence>
+        {expandedPhoto && (
+          <ExpandedOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleCloseExpanded}
+          >
+            <ExpandedImage
+              src={expandedPhoto.url}
+              alt={expandedPhoto.location}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </ExpandedOverlay>
+        )}
+      </AnimatePresence>
     </PhotosSection>
   )
 }

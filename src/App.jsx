@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Travels from './components/Travels'
 import Quotes from './components/Quotes'
 import Photos from './components/Photos'
+import Projects from './components/Projects'
 import './App.css'
 
 const AppContainer = styled.div`
@@ -199,6 +200,7 @@ function App() {
             <NavLink to="/">home</NavLink>
             <NavLink to="/travels">travels</NavLink>
             <NavLink to="/photos">photos</NavLink>
+            <NavLink to="/projects">projects</NavLink>
             {/* <NavLink to="/quotes">quotes</NavLink> */}
           </Nav>
           <ThemeToggle theme={theme} onClick={toggleTheme}>
@@ -242,6 +244,7 @@ function App() {
             } />
             <Route path="/travels" element={<Travels theme={theme} />} />
             <Route path="/photos" element={<Photos theme={theme} />} />
+            <Route path="/projects" element={<Projects theme={theme} />} />
             {/* <Route path="/quotes" element={<Quotes theme={theme} />} /> */}
           </Routes>
         </MainContent>
