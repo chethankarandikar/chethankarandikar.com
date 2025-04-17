@@ -199,7 +199,7 @@ const projects = [
     title: "High Altitude Rocket Live Video System",
     thumbnail: "/project-photos/rocket.jpeg",
     images: [
-      { src: "/project-photos/schematic.jpeg", caption: "CAM Board Schematic" },
+      { src: "/project-photos/soldering.JPG", caption: "Soldering Video Amplifer" },
       { src: "/project-photos/CAM.jpg", caption: "CAM Board" },
       { src: "/project-photos/videobox.jpg", caption: "Video System" },
     ],
