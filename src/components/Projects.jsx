@@ -88,23 +88,27 @@ const ProjectContent = styled.div`
 
 const ProjectImages = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin: 1.5rem 0;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 `
 
 const ImageContainer = styled.div`
   width: 100%;
-  aspect-ratio: 1/1;
-  background: ${props => props.theme === 'dark' ? '#121212' : '#f8f8f8'};
+  aspect-ratio: 1;
+  background: ${props => props.theme === 'dark' ? '#2a2a2a' : '#f5f5f5'};
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: ${props => props.theme === 'dark' 
-    ? '0 4px 15px rgba(0, 0, 0, 0.2)' 
-    : '0 4px 15px rgba(0, 0, 0, 0.05)'};
+    ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
+    : '0 4px 12px rgba(0, 0, 0, 0.1)'};
   transition: transform 0.3s ease;
   cursor: pointer;
   
@@ -116,7 +120,7 @@ const ImageContainer = styled.div`
 const ProjectImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 `
 
 const ImageCaption = styled.div`
@@ -164,18 +168,43 @@ const ExpandedImageOverlay = styled(motion.div)`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: ${props => props.theme === 'dark' 
+    ? 'rgba(26, 26, 26, 0.95)' 
+    : 'rgba(255, 255, 255, 0.95)'};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+`
+
+const ExpandedImageContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90vh;
 `
 
 const ExpandedImage = styled(motion.img)`
-  max-width: 90%;
-  max-height: 90vh;
+  max-width: 100%;
+  max-height: 80vh;
   object-fit: contain;
+  border-radius: 8px;
+  box-shadow: ${props => props.theme === 'dark' 
+    ? '0 10px 30px rgba(0, 0, 0, 0.3)' 
+    : '0 10px 30px rgba(0, 0, 0, 0.1)'};
+  margin-bottom: 1rem;
+`
+
+const ExpandedCaption = styled.div`
+  color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 1rem;
 `
 
 // Project data
@@ -189,7 +218,7 @@ const projects = [
       { src: "/project-photos/CAM.jpg", caption: "CAM Board" },
       { src: "/project-photos/videobox.jpg", caption: "Video System" },
     ],
-    description: "As part of the Illinois Space Society (SEDS) chapter's SpaceShot high altitude rocket project, I helped design a custom multi-camera system for a rocket flight to over 100,000 feet. The system streamed real-time video from the rocket to a ground station during launch. I helped develop the camera PCB in KiCad which features an ESP32 micro controller, power and video multiplexers, battery monitoring, and CAN/I²C communication. I also wrote embedded C code to monitor camera power and recording status over UART. Beyond the electronics, I helped integrate the transmitters, receivers, and antennas, and ran the ground station during launch at the FAR site in California.",
+    description: "As part of the Illinois Space Society (SEDS) chapter's SpaceShot high altitude rocket project, I helped design a custom multi-camera video system for a high altitude rocket designed to reach more than 100,000 feet. The system streamed real-time video from the rocket to a ground station during launch. I helped develop the camera PCB in KiCad which features an ESP32 micro controller, power and video multiplexers, battery monitoring, and CAN/I²C communication. I also wrote embedded C code to monitor camera power and recording status over UART. Beyond the electronics, I helped integrate transmitters, receivers, and antennas, and ran the ground station during launch at the FAR site in California.",
     youtube: "LAU9tVVYQgk"
   },
   // Add more projects as needed
@@ -232,23 +261,16 @@ function Projects({ theme }) {
             <ProjectContent>
               <ProjectImages>
                 {project.images.map((image, index) => (
-                  <div key={index}>
-                    <ImageContainer 
-                      theme={theme}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleImageClick(image)
-                      }}
-                    >
-                      <ProjectImage
-                        src={image.src}
-                        alt={`${project.title} - ${image.caption}`}
-                      />
-                    </ImageContainer>
-                    <ImageCaption theme={theme}>
-                      {image.caption}
-                    </ImageCaption>
-                  </div>
+                  <ImageContainer 
+                    key={index}
+                    theme={theme}
+                    onClick={() => handleImageClick(image)}
+                  >
+                    <ProjectImage
+                      src={image.src}
+                      alt={`${project.title} - ${image.caption}`}
+                    />
+                  </ImageContainer>
                 ))}
               </ProjectImages>
               {project.youtube && (
@@ -284,19 +306,28 @@ function Projects({ theme }) {
       <AnimatePresence>
         {expandedImage && (
           <ExpandedImageOverlay
+            theme={theme}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleCloseExpanded}
           >
-            <ExpandedImage
-              src={expandedImage.src}
-              alt="Expanded view"
+            <ExpandedImageContainer
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            />
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExpandedImage
+                theme={theme}
+                src={expandedImage.src}
+                alt="Expanded view"
+              />
+              <ExpandedCaption theme={theme}>
+                {expandedImage.caption}
+              </ExpandedCaption>
+            </ExpandedImageContainer>
           </ExpandedImageOverlay>
         )}
       </AnimatePresence>
