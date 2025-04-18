@@ -65,6 +65,7 @@ const ProjectTitle = styled.h2`
   font-weight: 600;
   margin: 0 0 1rem 0;
   color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
+  text-transform: lowercase;
   
   @media (max-width: 768px) {
     font-size: 1.6rem;
@@ -72,10 +73,11 @@ const ProjectTitle = styled.h2`
 `
 
 const ProjectDescription = styled.p`
-  color: ${props => props.theme === 'dark' ? '#bbbbbb' : '#555555'};
+  color: ${props => props.theme === 'dark' ? '#ffffff' : '#555555'};
   font-size: 1.1rem;
   line-height: 1.7;
   margin: 0;
+  text-transform: lowercase;
   
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -129,6 +131,7 @@ const ImageCaption = styled.div`
   text-align: center;
   padding: 0.7rem 0;
   width: 100%;
+  text-transform: lowercase;
 `
 
 const ProjectLinks = styled.div`
@@ -205,6 +208,7 @@ const ExpandedCaption = styled.div`
   font-weight: 500;
   text-align: center;
   margin-top: 1rem;
+  text-transform: lowercase;
 `
 
 // Project data
@@ -248,7 +252,7 @@ function Projects({ theme }) {
           >
             <ProjectHeader>
               <ProjectHeaderContent>
-                <ProjectTitle>{project.title}</ProjectTitle>
+                <ProjectTitle theme={theme}>{project.title}</ProjectTitle>
                 <ProjectDescription theme={theme}>
                   {project.description}
                 </ProjectDescription>
