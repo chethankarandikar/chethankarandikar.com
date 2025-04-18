@@ -11,8 +11,8 @@ const PhotosSection = styled.section`
 
 const PhotosGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
 `
@@ -20,10 +20,18 @@ const PhotosGrid = styled.div`
 const PhotoCard = styled(motion.div)`
   position: relative;
   aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   background: ${props => props.theme === 'dark' ? '#2a2a2a' : '#f5f5f5'};
   cursor: pointer;
+  box-shadow: ${props => props.theme === 'dark' 
+    ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
+    : '0 4px 12px rgba(0, 0, 0, 0.1)'};
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
 `
 
 const PhotoImage = styled.img`
@@ -32,46 +40,63 @@ const PhotoImage = styled.img`
   object-fit: cover;
 `
 
-const PhotoInfo = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  color: white;
-`
-
-const PhotoLocation = styled.p`
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
-`
-
-const PhotoDate = styled.p`
-  margin: 0.25rem 0 0 0;
-  font-size: 0.9rem;
-  opacity: 0.8;
-`
-
 const ExpandedOverlay = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: ${props => props.theme === 'dark' 
+    ? 'rgba(26, 26, 26, 0.95)' 
+    : 'rgba(255, 255, 255, 0.95)'};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+`
+
+const ExpandedImageContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90vh;
 `
 
 const ExpandedImage = styled(motion.img)`
-  max-width: 90%;
-  max-height: 90vh;
+  max-width: 100%;
+  max-height: 80vh;
   object-fit: contain;
+  border-radius: 8px;
+  box-shadow: ${props => props.theme === 'dark' 
+    ? '0 10px 30px rgba(0, 0, 0, 0.3)' 
+    : '0 10px 30px rgba(0, 0, 0, 0.1)'};
+  margin-bottom: 1.5rem;
+`
+
+const PhotoInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
+`
+
+const PhotoLocation = styled.p`
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+`
+
+const PhotoDate = styled.p`
+  margin: 0.25rem 0 0 0;
+  font-size: 1rem;
+  opacity: ${props => props.theme === 'dark' ? 0.7 : 0.6};
+  text-align: center;
 `
 
 // Photo data from Travels component
@@ -167,7 +192,8 @@ const photos = [
     id: 13,
     url: "/website-photos/london.jpg",
     location: "london, england",
-    coordinates: []
+    coordinates: [],
+    date: "2023"
   }
 ];
 
@@ -198,10 +224,6 @@ function Photos({ theme }) {
               src={photo.url} 
               alt={photo.location} 
             />
-            <PhotoInfo>
-              <PhotoLocation>{photo.location}</PhotoLocation>
-              {photo.date && <PhotoDate>{photo.date}</PhotoDate>}
-            </PhotoInfo>
           </PhotoCard>
         ))}
       </PhotosGrid>
@@ -209,20 +231,31 @@ function Photos({ theme }) {
       <AnimatePresence>
         {expandedPhoto && (
           <ExpandedOverlay
+            theme={theme}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleCloseExpanded}
           >
-            <ExpandedImage
-              src={expandedPhoto.url}
-              alt={expandedPhoto.location}
+            <ExpandedImageContainer
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-            />
+            >
+              <ExpandedImage
+                theme={theme}
+                src={expandedPhoto.url}
+                alt={expandedPhoto.location}
+              />
+              <PhotoInfo theme={theme}>
+                <PhotoLocation>{expandedPhoto.location}</PhotoLocation>
+                {expandedPhoto.date && (
+                  <PhotoDate theme={theme}>{expandedPhoto.date}</PhotoDate>
+                )}
+              </PhotoInfo>
+            </ExpandedImageContainer>
           </ExpandedOverlay>
         )}
       </AnimatePresence>

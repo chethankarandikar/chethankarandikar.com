@@ -3,16 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
 const ProjectsSection = styled.section`
-  padding: 2rem 0;
+  padding: 3rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: calc(100vh - 80px);
-  box-sizing: border-box;
   
   @media (max-width: 768px) {
-    padding: 1rem 0;
+    padding: 2rem 1rem;
     min-height: calc(100vh - 120px);
   }
 `
@@ -20,17 +18,18 @@ const ProjectsSection = styled.section`
 const ProjectsGrid = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 4rem;
   width: 100%;
-  max-width: 1200px;
-  padding: 0 1rem;
+  max-width: 1000px;
 `
 
 const ProjectCard = styled(motion.div)`
-  background: ${props => props.theme === 'dark' ? '#2a2a2a' : '#f5f5f5'};
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 2rem;
+  background: ${props => props.theme === 'dark' ? '#1e1e1e' : '#ffffff'};
+  box-shadow: ${props => props.theme === 'dark' 
+    ? '0 10px 30px rgba(0, 0, 0, 0.2)' 
+    : '0 10px 30px rgba(0, 0, 0, 0.05)'};
 `
 
 const ProjectHeader = styled.div`
@@ -39,17 +38,13 @@ const ProjectHeader = styled.div`
 `
 
 const ProjectHeaderContent = styled.div`
-  padding: 1.5rem;
+  padding: 2rem 2rem 1rem;
   order: 1;
 `
 
 const ThumbnailContainer = styled.div`
   width: 100%;
   aspect-ratio: 16/9;
-  background: ${props => props.theme === 'dark' ? '#1a1a1a' : '#f0f0f0'};
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   order: 2;
 `
@@ -58,22 +53,28 @@ const ProjectThumbnail = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
 `
 
 const ProjectTitle = styled.h2`
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 600;
   margin: 0 0 1rem 0;
+  color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
   
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 `
 
 const ProjectDescription = styled.p`
-  color: ${props => props.theme === 'dark' ? '#888' : '#666'};
+  color: ${props => props.theme === 'dark' ? '#bbbbbb' : '#555555'};
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0;
   
   @media (max-width: 768px) {
@@ -81,34 +82,49 @@ const ProjectDescription = styled.p`
   }
 `
 
-const ProjectContent = styled(motion.div)`
-  padding: 0 1.5rem 1.5rem;
-  border-top: 1px solid ${props => props.theme === 'dark' ? '#333' : '#ddd'};
+const ProjectContent = styled.div`
+  padding: 1rem 2rem 2rem;
 `
 
 const ProjectImages = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   margin: 1.5rem 0;
 `
 
 const ImageContainer = styled.div`
   width: 100%;
   aspect-ratio: 1/1;
-  background: ${props => props.theme === 'dark' ? '#1a1a1a' : '#f0f0f0'};
+  background: ${props => props.theme === 'dark' ? '#121212' : '#f8f8f8'};
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: ${props => props.theme === 'dark' 
+    ? '0 4px 15px rgba(0, 0, 0, 0.2)' 
+    : '0 4px 15px rgba(0, 0, 0, 0.05)'};
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
 `
 
 const ProjectImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+`
+
+const ImageCaption = styled.div`
+  color: ${props => props.theme === 'dark' ? '#999999' : '#777777'};
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.7rem 0;
+  width: 100%;
 `
 
 const ProjectLinks = styled.div`
@@ -125,6 +141,20 @@ const ProjectLink = styled.a`
   
   &:hover {
     opacity: 0.8;
+  }
+`
+
+const ProjectVideo = styled.div`
+  width: 100%;
+  margin: 2rem 0;
+  iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: 8px;
+    box-shadow: ${props => props.theme === 'dark' 
+      ? '0 4px 15px rgba(0, 0, 0, 0.2)' 
+      : '0 4px 15px rgba(0, 0, 0, 0.05)'};
   }
 `
 
@@ -148,50 +178,6 @@ const ExpandedImage = styled(motion.img)`
   object-fit: contain;
 `
 
-const ExpandedImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  max-width: 90%;
-  max-height: 90vh;
-`
-
-const ExpandedImageCaption = styled.div`
-  color: white;
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  max-width: 100%;
-`
-
-const ImageCaption = styled.div`
-  color: ${props => props.theme === 'dark' ? '#888' : '#666'};
-  font-size: 0.9rem;
-  text-align: center;
-  padding: 0.5rem;
-  background: ${props => props.theme === 'dark' ? '#1a1a1a' : '#f0f0f0'};
-  border-radius: 0 0 4px 4px;
-  width: 100%;
-`
-
-// Comment out ProjectVideo component
-/*
-const ProjectVideo = styled.div`
-  width: 100%;
-  margin-top: 1.5rem;
-  video {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    border-radius: 4px;
-    background: ${props => props.theme === 'dark' ? '#1a1a1a' : '#f0f0f0'};
-  }
-`
-*/
-
 // Project data
 const projects = [
   {
@@ -203,22 +189,9 @@ const projects = [
       { src: "/project-photos/CAM.jpg", caption: "CAM Board" },
       { src: "/project-photos/videobox.jpg", caption: "Video System" },
     ],
-    description: "As part of the Illinois Space Society (SEDS) chapter's SpaceShot high altitude rocket project, I designed a custom multi-camera system for a rocket flight to over 100,000 feet. The system streamed real-time video from the rocket to a ground station during launch. I built the camera PCB in KiCad, with an ESP32 at the core, along with power and video multiplexers, battery monitoring, and CAN/I²C communication. I also wrote embedded C code to monitor camera power and recording status over UART. Beyond the electronics, I helped integrate the transmitters, receivers, and antennas, and ran the ground station during launch at the FAR site in California.",
-    // video: "/project-photos/rocket-video.mp4" // Commented out video property
+    description: "As part of the Illinois Space Society (SEDS) chapter's SpaceShot high altitude rocket project, I helped design a custom multi-camera system for a rocket flight to over 100,000 feet. The system streamed real-time video from the rocket to a ground station during launch. I helped develop the camera PCB in KiCad which features an ESP32 micro controller, power and video multiplexers, battery monitoring, and CAN/I²C communication. I also wrote embedded C code to monitor camera power and recording status over UART. Beyond the electronics, I helped integrate the transmitters, receivers, and antennas, and ran the ground station during launch at the FAR site in California.",
+    youtube: "LAU9tVVYQgk"
   },
-  // {
-  //   id: 2,
-  //   title: "Project 2",
-  //   thumbnail: "/project-photos/project2-thumb.jpg",
-  //   images: [
-  //     "/project-photos/project2-1.jpg",
-  //     "/project-photos/project2-2.jpg"
-  //   ],
-  //   description: "Description of project 2. What it does, technologies used, and what you learned.",
-  //   links: [
-  //     { text: "GitHub", url: "https://github.com/yourusername/project2" }
-  //   ]
-  // },
   // Add more projects as needed
 ]
 
@@ -251,12 +224,12 @@ function Projects({ theme }) {
                   {project.description}
                 </ProjectDescription>
               </ProjectHeaderContent>
-              <ThumbnailContainer theme={theme}>
+              <ThumbnailContainer>
                 <ProjectThumbnail src={project.thumbnail} alt={project.title} />
               </ThumbnailContainer>
             </ProjectHeader>
 
-            <ProjectContent theme={theme}>
+            <ProjectContent>
               <ProjectImages>
                 {project.images.map((image, index) => (
                   <div key={index}>
@@ -266,7 +239,6 @@ function Projects({ theme }) {
                         e.stopPropagation()
                         handleImageClick(image)
                       }}
-                      style={{ cursor: 'pointer' }}
                     >
                       <ProjectImage
                         src={image.src}
@@ -279,20 +251,16 @@ function Projects({ theme }) {
                   </div>
                 ))}
               </ProjectImages>
-              {/* Commented out video section
-              {project.video && (
+              {project.youtube && (
                 <ProjectVideo theme={theme}>
-                  <video
-                    src={project.video}
-                    controls
-                    playsInline
+                  <iframe
+                    src={`https://www.youtube.com/embed/${project.youtube}`}
                     title={`${project.title} Video`}
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
                 </ProjectVideo>
               )}
-              */}
               {project.links && project.links.length > 0 && (
                 <ProjectLinks>
                   {project.links.map((link, index) => (
