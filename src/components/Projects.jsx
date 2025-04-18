@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const ProjectsSection = styled.section`
   padding: 3rem 1rem;
@@ -30,6 +30,8 @@ const ProjectCard = styled(motion.div)`
   box-shadow: ${props => props.theme === 'dark' 
     ? '0 10px 30px rgba(0, 0, 0, 0.2)' 
     : '0 10px 30px rgba(0, 0, 0, 0.05)'};
+  transition: background var(--theme-transition-speed) ease, box-shadow var(--theme-transition-speed) ease;
+  will-change: background, box-shadow;
 `
 
 const ProjectHeader = styled.div`
@@ -66,6 +68,8 @@ const ProjectTitle = styled.h2`
   margin: 0 0 1rem 0;
   color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
   text-transform: lowercase;
+  transition: color var(--theme-transition-speed) ease;
+  will-change: color;
   
   @media (max-width: 768px) {
     font-size: 1.6rem;
@@ -78,6 +82,8 @@ const ProjectDescription = styled.p`
   line-height: 1.7;
   margin: 0;
   text-transform: lowercase;
+  transition: color var(--theme-transition-speed) ease;
+  will-change: color;
   
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -111,7 +117,8 @@ const ImageContainer = styled.div`
   box-shadow: ${props => props.theme === 'dark' 
     ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
     : '0 4px 12px rgba(0, 0, 0, 0.1)'};
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background var(--theme-transition-speed) ease, box-shadow var(--theme-transition-speed) ease;
+  will-change: transform, background, box-shadow;
   cursor: pointer;
   
   &:hover {
@@ -132,6 +139,7 @@ const ImageCaption = styled.div`
   padding: 0.7rem 0;
   width: 100%;
   text-transform: lowercase;
+  transition: color var(--theme-transition-speed) ease;
 `
 
 const ProjectLinks = styled.div`
@@ -144,7 +152,7 @@ const ProjectLink = styled.a`
   color: ${props => props.theme === 'dark' ? '#64b5f6' : '#1976d2'};
   text-decoration: none;
   font-size: 1rem;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, color var(--theme-transition-speed) ease;
   
   &:hover {
     opacity: 0.8;
@@ -162,6 +170,8 @@ const ProjectVideo = styled.div`
     box-shadow: ${props => props.theme === 'dark' 
       ? '0 4px 15px rgba(0, 0, 0, 0.2)' 
       : '0 4px 15px rgba(0, 0, 0, 0.05)'};
+    transition: box-shadow var(--theme-transition-speed) ease;
+    will-change: box-shadow;
   }
 `
 
@@ -181,6 +191,8 @@ const ExpandedImageOverlay = styled(motion.div)`
   z-index: 1000;
   cursor: pointer;
   backdrop-filter: blur(10px);
+  transition: background var(--theme-transition-speed) ease;
+  will-change: background;
 `
 
 const ExpandedImageContainer = styled(motion.div)`
@@ -200,6 +212,8 @@ const ExpandedImage = styled(motion.img)`
     ? '0 10px 30px rgba(0, 0, 0, 0.3)' 
     : '0 10px 30px rgba(0, 0, 0, 0.1)'};
   margin-bottom: 1rem;
+  transition: box-shadow var(--theme-transition-speed) ease;
+  will-change: box-shadow;
 `
 
 const ExpandedCaption = styled.div`
@@ -209,6 +223,8 @@ const ExpandedCaption = styled.div`
   text-align: center;
   margin-top: 1rem;
   text-transform: lowercase;
+  transition: color var(--theme-transition-speed) ease;
+  will-change: color;
 `
 
 // Project data
@@ -230,6 +246,12 @@ const projects = [
 
 function Projects({ theme }) {
   const [expandedImage, setExpandedImage] = useState(null)
+  const [visibleProjects, setVisibleProjects] = useState([])
+  
+  // Implement loading optimization
+  useEffect(() => {
+    setVisibleProjects(projects)
+  }, [])
 
   const handleImageClick = (image) => {
     setExpandedImage(image)
@@ -242,7 +264,7 @@ function Projects({ theme }) {
   return (
     <ProjectsSection>
       <ProjectsGrid>
-        {projects.map((project) => (
+        {visibleProjects.map((project) => (
           <ProjectCard
             key={project.id}
             theme={theme}
@@ -258,7 +280,7 @@ function Projects({ theme }) {
                 </ProjectDescription>
               </ProjectHeaderContent>
               <ThumbnailContainer>
-                <ProjectThumbnail src={project.thumbnail} alt={project.title} />
+                <ProjectThumbnail src={project.thumbnail} alt={project.title} loading="lazy" />
               </ThumbnailContainer>
             </ProjectHeader>
 
@@ -273,6 +295,7 @@ function Projects({ theme }) {
                     <ProjectImage
                       src={image.src}
                       alt={`${project.title} - ${image.caption}`}
+                      loading="lazy"
                     />
                   </ImageContainer>
                 ))}
@@ -284,6 +307,7 @@ function Projects({ theme }) {
                     title={`${project.title} Video`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    loading="lazy"
                   />
                 </ProjectVideo>
               )}
@@ -339,4 +363,4 @@ function Projects({ theme }) {
   )
 }
 
-export default Projects 
+export default Projects

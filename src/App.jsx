@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/react"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
@@ -11,11 +11,14 @@ import Photos from './components/Photos'
 import Projects from './components/Projects'
 import './App.css'
 
+// Global styles with CSS Custom Properties
 const AppContainer = styled.div`
+  --theme-transition-speed: 0.2s;
   min-height: 100vh;
   background-color: ${props => props.theme === 'dark' ? '#1a1a1a' : '#ffffff'};
   color: ${props => props.theme === 'dark' ? '#ffffff' : '#1a1a1a'};
-  transition: all 0.3s ease;
+  transition: background-color var(--theme-transition-speed) ease, color var(--theme-transition-speed) ease;
+  will-change: background-color, color;
 `
 
 const Header = styled.header`
@@ -29,6 +32,8 @@ const Header = styled.header`
   right: 0;
   background-color: ${props => props.theme === 'dark' ? '#1a1a1a' : '#ffffff'};
   z-index: 1000;
+  transition: background-color var(--theme-transition-speed) ease;
+  will-change: background-color;
   
   @media (max-width: 768px) {
     padding: 1rem;
@@ -57,6 +62,7 @@ const NavLink = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  transition: color var(--theme-transition-speed) ease;
   
   &:after {
     content: '';
@@ -98,7 +104,7 @@ const ThemeToggle = styled.button`
   font-size: 0.9rem;
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  transition: background-color var(--theme-transition-speed) ease, color var(--theme-transition-speed) ease;
   text-transform: lowercase;
   letter-spacing: 0.5px;
   
@@ -116,6 +122,7 @@ const MainContent = styled.main`
   margin: 0 auto;
   padding: 2rem;
   padding-top: 6rem;
+  transition: background-color var(--theme-transition-speed) ease, color var(--theme-transition-speed) ease;
   
   @media (max-width: 768px) {
     padding: 1rem;
@@ -148,6 +155,7 @@ const Subtitle = styled(motion.p)`
   font-size: 1.5rem;
   color: ${props => props.theme === 'dark' ? '#888' : '#666'};
   margin-bottom: 2rem;
+  transition: color var(--theme-transition-speed) ease;
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -170,7 +178,7 @@ const BioLink = styled.a`
   color: ${props => props.theme === 'dark' ? '#64b5f6' : '#1976d2'};
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: color var(--theme-transition-speed) ease;
   position: relative;
   
   &:hover {
@@ -180,10 +188,27 @@ const BioLink = styled.a`
 
 function App() {
   const [theme, setTheme] = useState('light')
+  
+  // Use localStorage to remember theme preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      setTheme(savedTheme)
+    }
+  }, [])
 
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+    setTheme(prevTheme => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', newTheme)
+      return newTheme
+    })
   }
+  
+  // Add a class to the HTML element for global CSS access
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
 
   return (
     <Router>

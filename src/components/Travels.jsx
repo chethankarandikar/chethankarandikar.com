@@ -71,11 +71,9 @@ const MapStats = styled.div`
 `
 
 const StatItem = styled.div`
-  text-align: center;
-  
-  @media (max-width: 768px) {
-    flex: 1 0 40%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
   .value {
     font-size: 1.5rem;
@@ -89,6 +87,7 @@ const StatItem = styled.div`
   
   .label {
     color: ${props => props.theme === 'dark' ? '#888' : '#666'};
+    transition: color var(--theme-transition-speed) ease;
     
     @media (max-width: 768px) {
       font-size: 0.8rem;
@@ -100,12 +99,13 @@ const PhotosLink = styled(Link)`
   color: ${props => props.theme === 'dark' ? '#888' : '#666'};
   text-decoration: none;
   font-size: 0.9rem;
-  transition: opacity 0.3s ease;
+  transition: color var(--theme-transition-speed) ease, opacity 0.3s ease;
   text-align: center;
   
   .label {
     margin-bottom: 0.25rem;
     color: ${props => props.theme === 'dark' ? '#888' : '#666'};
+    transition: color var(--theme-transition-speed) ease;
   }
   
   .value {

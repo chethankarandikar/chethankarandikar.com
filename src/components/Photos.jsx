@@ -7,6 +7,8 @@ const PhotosSection = styled.section`
   padding: 2rem;
   min-height: 100vh;
   background: ${props => props.theme === 'dark' ? '#1a1a1a' : '#ffffff'};
+  transition: background var(--theme-transition-speed) ease;
+  will-change: background-color;
 `
 
 const PhotosGrid = styled.div`
@@ -27,7 +29,8 @@ const PhotoCard = styled(motion.div)`
   box-shadow: ${props => props.theme === 'dark' 
     ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
     : '0 4px 12px rgba(0, 0, 0, 0.1)'};
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background var(--theme-transition-speed) ease, box-shadow var(--theme-transition-speed) ease;
+  will-change: transform, background, box-shadow;
   
   &:hover {
     transform: translateY(-5px);
@@ -56,6 +59,8 @@ const ExpandedOverlay = styled(motion.div)`
   z-index: 1000;
   cursor: pointer;
   backdrop-filter: blur(10px);
+  transition: background var(--theme-transition-speed) ease;
+  will-change: background;
 `
 
 const ExpandedImageContainer = styled(motion.div)`
@@ -75,6 +80,7 @@ const ExpandedImage = styled(motion.img)`
     ? '0 10px 30px rgba(0, 0, 0, 0.3)' 
     : '0 10px 30px rgba(0, 0, 0, 0.1)'};
   margin-bottom: 1.5rem;
+  transition: box-shadow var(--theme-transition-speed) ease;
 `
 
 const PhotoInfo = styled.div`
@@ -83,6 +89,7 @@ const PhotoInfo = styled.div`
   align-items: center;
   margin-top: 1rem;
   color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
+  transition: color var(--theme-transition-speed) ease;
 `
 
 const PhotoLocation = styled.p`
@@ -97,6 +104,7 @@ const PhotoDate = styled.p`
   font-size: 1rem;
   opacity: ${props => props.theme === 'dark' ? 0.7 : 0.6};
   text-align: center;
+  transition: opacity var(--theme-transition-speed) ease;
 `
 
 // Photo data from Travels component
@@ -199,6 +207,20 @@ const photos = [
 
 function Photos({ theme }) {
   const [expandedPhoto, setExpandedPhoto] = useState(null);
+  const [visiblePhotos, setVisiblePhotos] = useState([]);
+  
+  // Implement photo lazy loading
+  useEffect(() => {
+    // Initially load first 8 photos
+    setVisiblePhotos(photos.slice(0, 8));
+    
+    // Load the rest after a small delay
+    const timer = setTimeout(() => {
+      setVisiblePhotos(photos);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const handlePhotoClick = (photo) => {
     setExpandedPhoto(photo);
@@ -211,7 +233,7 @@ function Photos({ theme }) {
   return (
     <PhotosSection theme={theme}>
       <PhotosGrid>
-        {photos.map((photo) => (
+        {visiblePhotos.map((photo) => (
           <PhotoCard
             key={photo.id}
             theme={theme}
@@ -223,6 +245,7 @@ function Photos({ theme }) {
             <PhotoImage 
               src={photo.url} 
               alt={photo.location} 
+              loading="lazy"
             />
           </PhotoCard>
         ))}
