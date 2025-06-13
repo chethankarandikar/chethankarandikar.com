@@ -195,13 +195,6 @@ const photos = [
     location: "la jolla, california",
     coordinates: [],
     date: "2023"
-  },
-  {
-    id: 13,
-    url: "/website-photos/london.jpg",
-    location: "london, england",
-    coordinates: [],
-    date: "2023"
   }
 ];
 

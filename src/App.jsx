@@ -82,17 +82,36 @@ const NavLink = styled(Link)`
 
 const SocialLinks = styled.div`
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
   margin-top: 2rem;
 `
 
 const SocialLink = styled.a`
   color: inherit;
-  font-size: 1.5rem;
-  transition: opacity 0.3s ease;
+  font-size: 1rem;
+  text-transform: lowercase;
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--theme-transition-speed) ease;
   
-  &:hover {
-    opacity: 0.8;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+  
+  &:hover:after {
+    width: 100%;
   }
 `
 
@@ -143,11 +162,11 @@ const HeroSection = styled.section`
 `
 
 const Title = styled(motion.h1)`
-  font-size: 4rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 `
 
@@ -252,16 +271,17 @@ function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.6 }}
                   >
-                    i'm an 18 year old computer engineering student at uiuc with a love for hardware and software development. 
-                    i'm currently working as an undergraduate research assistant at <BioLink href="https://lassiaero.web.illinois.edu/about-lassi/" target="_blank" rel="noopener noreferrer" theme={theme}>lassi </BioLink> 
-                    and as an avionics hardware engineer with the <BioLink href="https://illinoisspacesociety.org" target="_blank" rel="noopener noreferrer" theme={theme}>illinois space society.</BioLink>
+                    I'm a 19-year-old computer engineering student at UIUC who loves building things, listening to music, taking photos, and traveling the world.
                   </BioText>
                   <SocialLinks>
                     <SocialLink href="https://github.com/chethankarandikar" target="_blank" rel="noopener noreferrer">
-                      <FaGithub />
+                      github
                     </SocialLink>
                     <SocialLink href="https://linkedin.com/in/chethankarandikar" target="_blank" rel="noopener noreferrer">
-                      <FaLinkedin />
+                      linkedin
+                    </SocialLink>
+                    <SocialLink as="span" tabIndex="-1" style={{ cursor: 'default', pointerEvents: 'none' }}>
+                      updated june 2025
                     </SocialLink>
                   </SocialLinks>
                 </HeroSection>
