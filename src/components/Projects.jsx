@@ -279,8 +279,8 @@ const projects = [
       { src: "/project-photos/CAM.jpg", caption: "CAM Board" },
       { src: "/project-photos/videobox.jpg", caption: "Video System" },
     ],
-    description: "As part of the Illinois Space Society (SEDS) chapter's SpaceShot high altitude rocket project, I helped design a custom multi-camera video system for a high altitude rocket designed to reach more than 100,000 feet. The system streamed real-time video from the rocket to a ground station during launch. I helped develop the camera PCB in KiCad which features an ESP32 micro controller, power and video multiplexers, battery monitoring, and CAN/I²C communication. I also wrote embedded C code to monitor camera power and recording status over UART. Beyond the electronics, I helped integrate transmitters, receivers, and antennas, and ran the ground station during launch at the FAR site in California.",
-    youtube: "LAU9tVVYQgk"
+    description: "As part of the Illinois Space Society (SEDS) chapter's SpaceShot high altitude rocket project, I helped design a custom multi-camera video system for a high altitude rocket that flew to 75k+ feet. The system streamed real-time video from the rocket to a ground station during launch. I helped develop the camera PCB in KiCad which features an ESP32 micro controller, power and video multiplexers, battery monitoring, and CAN/I²C communication. I also wrote embedded C code to monitor camera power and recording status over UART. Beyond the electronics, I helped integrate transmitters, receivers, and antennas, and ran the ground station during launch at the FAR site in California.",
+    youtube: "5BYeBV-nO4Y"
   },
   {
     id: 3,
