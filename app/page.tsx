@@ -43,6 +43,9 @@ type ProjectVideoProps = {
     thumbnail?: string
     youtube?: string
     name: string
+    description: string
+    note?: string
+    images?: { src: string; caption: string }[]
   }
 }
 

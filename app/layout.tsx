@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Chethan Karandikar - Computer Engineering @ UIUC',
     template: '%s | Chethan Karandikar'
   },
-  description: 'Computer engineering student at UIUC building systems that help humans explore space, taking photos, and traveling the world.',
+  description: 'I\'m a computer engineering student interested in building systems that will make humans a spacefaring species.',
 };
 
 const geist = Geist({
@@ -49,7 +49,6 @@ export default function RootLayout({
           attribute="class"
           storageKey="theme"
           defaultTheme="system"
-          suppressHydrationWarning
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
             <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
