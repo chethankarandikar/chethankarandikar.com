@@ -4,6 +4,7 @@ import './globals.css'
 import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
+import { Analytics } from '@vercel/analytics/react'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -21,6 +22,18 @@ export const metadata: Metadata = {
     template: '%s | Chethan Karandikar'
   },
   description: 'I\'m a computer engineering student interested in building systems that will make humans a spacefaring species.',
+  openGraph: {
+    title: 'Chethan Karandikar - Computer Engineering @ UIUC',
+    description: 'I\'m a computer engineering student interested in building systems that will make humans a spacefaring species.',
+    url: 'https://chethankarandikar.com/',
+    siteName: 'Chethan Karandikar',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Chethan Karandikar - Computer Engineering @ UIUC',
+    description: 'I\'m a computer engineering student interested in building systems that will make humans a spacefaring species.',
+  },
 };
 
 const geist = Geist({
@@ -58,6 +71,7 @@ export default function RootLayout({
             </div>
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
