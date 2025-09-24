@@ -15,6 +15,15 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  async redirects() {
+    return [
+      {
+        source: '/projects',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 const withMDX = createMDX({
